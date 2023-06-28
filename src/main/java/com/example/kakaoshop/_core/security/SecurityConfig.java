@@ -39,6 +39,7 @@ public class SecurityConfig {
         @Override
         public void configure(HttpSecurity builder) throws Exception {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
+            builder.addFilter(new JWTAuthenticationFilter(authenticationManager));
             super.configure(builder);
         }
     }
@@ -58,8 +59,12 @@ public class SecurityConfig {
         http.cors().configurationSource(configurationSource());
 
 
+        // 4. jSessionId 사용 거부
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+
         // 5. form 로긴 해제 (UsernamePasswordAuthenticationFilter 비활성화)
-        http.formLogin().loginPage("/loginForm").loginProcessingUrl("/login");
+        http.formLogin().disable();
 
 
         // 6. 로그인 인증창이 뜨지 않게 비활성화
