@@ -1,13 +1,14 @@
 package com.example.kakaoshop;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HelloController {
+public class HelloRestController {
 
     @GetMapping("/")
-    public String hello() {
-        return "hello";
+    public ResponseEntity<?> hello() {
+        return ResponseEntity.ok("ok");
     }
 }
