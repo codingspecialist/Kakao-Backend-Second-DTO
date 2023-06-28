@@ -18,9 +18,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final UserJPARepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Optional<User> userOP = userRepository.findByUsername(username);
+        Optional<User> userOP = userRepository.findByEmail(email);
 
         if (userOP.isEmpty()) {
             log.warn("로그인에 실패하였습니다.");
