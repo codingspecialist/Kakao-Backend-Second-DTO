@@ -2,6 +2,7 @@ package com.example.kakaoshop.user;
 
 import com.example.kakaoshop._core.security.CustomUserDetails;
 import com.example.kakaoshop._core.security.JWTProvider;
+import com.example.kakaoshop._core.utils.ApiUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,7 +38,7 @@ public class UserRestController {
             return ResponseEntity.internalServerError().body("fail");
         }
 
-        return ResponseEntity.ok("ok");
+        return ResponseEntity.ok(ApiUtils.success(null));
     }
 
     // 로그인
@@ -51,7 +52,7 @@ public class UserRestController {
             CustomUserDetails myUserDetails = (CustomUserDetails) authentication.getPrincipal();
             String jwt = JWTProvider.create(myUserDetails.getUser());
 
-            return ResponseEntity.ok().header(JWTProvider.HEADER, jwt).body("ok");
+            return ResponseEntity.ok().header(JWTProvider.HEADER, jwt).body(ApiUtils.success(null));
 
         } catch (Exception e){
             return ResponseEntity.internalServerError().body("fail");
