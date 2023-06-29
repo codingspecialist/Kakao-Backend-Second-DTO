@@ -36,6 +36,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mustache' // 스프링 부트에서 Mustache 템플릿을 사용할 수 있는 기능 제공
 	implementation group: 'com.auth0', name: 'java-jwt', version: '4.3.0'
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+	testImplementation 'org.springframework.security:spring-security-test' // 테스트시 시큐리티 관련 편의 기능 제공
 }
 
 tasks.named('test') {
