@@ -1,8 +1,6 @@
 package com.example.kakaoshop._core.utils;
 
 import lombok.*;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.http.HttpStatus;
 
 public class ApiUtils {
@@ -20,28 +18,11 @@ public class ApiUtils {
         private final boolean success;
         private final T response;
         private final ApiError error;
-
-        @Override
-        public String toString() {
-            return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                    .append("success", success)
-                    .append("response", response)
-                    .append("error", error)
-                    .toString();
-        }
     }
 
     @Getter @Setter @AllArgsConstructor
     public static class ApiError {
         private final String message;
         private final int status;
-
-        @Override
-        public String toString() {
-            return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                    .append("message", message)
-                    .append("status", status)
-                    .toString();
-        }
     }
 }

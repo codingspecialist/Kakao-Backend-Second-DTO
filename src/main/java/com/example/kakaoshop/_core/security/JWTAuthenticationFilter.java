@@ -3,7 +3,6 @@ package com.example.kakaoshop._core.security;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.kakaoshop._core.utils.StringArrayConverter;
 import com.example.kakaoshop.user.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +16,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @Slf4j
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
@@ -35,17 +33,12 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
             return;
         }
 
-        String jwt = prefixJwt.replace(JWTProvider.TOKEN_PREFIX, "");
         try {
-            log.debug("디버그 : 토큰 있음");
-            DecodedJWT decodedJWT = JWTProvider.verify(jwt);
+            DecodedJWT decodedJWT = JWTProvider.verify(prefixJwt);
             int id = decodedJWT.getClaim("id").asInt();
             String roles = decodedJWT.getClaim("role").asString();
 
-            StringArrayConverter sac = new StringArrayConverter();
-            List<String> roleList = sac.convertToEntityAttribute(roles);
-
-            User user = User.builder().id(id).roles(roleList).build();
+            User user = User.builder().id(id).roles(roles).build();
             CustomUserDetails myUserDetails = new CustomUserDetails(user);
             Authentication authentication =
                     new UsernamePasswordAuthenticationToken(

@@ -3,7 +3,7 @@ package com.example.kakaoshop.cart;
 import com.example.kakaoshop._core.utils.ApiUtils;
 import com.example.kakaoshop.cart.response.CartItemDTO;
 import com.example.kakaoshop.cart.response.CartRespFindAllDTO;
-import com.example.kakaoshop.cart.response.OptionDTO;
+import com.example.kakaoshop.cart.response.ProductOptionDTO;
 import com.example.kakaoshop.cart.response.ProductDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ public class CartRestController {
                 .quantity(5)
                 .price(50000)
                 .build();
-        cartItemDTO1.setOption(OptionDTO.builder()
+        cartItemDTO1.setOption(ProductOptionDTO.builder()
                                 .id(1)
                                 .optionName("01. 슬라이딩 지퍼백 크리스마스에디션 4종")
                                 .price(10000)
@@ -38,7 +38,7 @@ public class CartRestController {
                 .quantity(5)
                 .price(54500)
                 .build();
-        cartItemDTO2.setOption(OptionDTO.builder()
+        cartItemDTO2.setOption(ProductOptionDTO.builder()
                                 .id(1)
                                 .optionName("02. 슬라이딩 지퍼백 크리스마스에디션 5종")
                                 .price(10900)
